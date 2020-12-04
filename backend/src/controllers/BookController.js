@@ -28,7 +28,6 @@ module.exports = {
         /* a library_id nao é enviada pelo body porque ela é a da library que tá logada e isso costuma vir pelo cabeçalho */
         const library_id = request.headers.authorization; /* dados sobre idioma, etc, contexto */
     
-        console.log(library_id);
         const [id] = await connection('books').insert({
             title,
             description,
@@ -42,7 +41,7 @@ module.exports = {
     async delete(request, response) {
         const { id } = request.params;
         const library_id = request.headers.authorization; /* dados sobre idioma, etc, contexto */
-    
+        
         const book = await connection('books')
             .where('id', id)
             .select('library_id')
